@@ -1,22 +1,20 @@
-module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('tbl_chats', {
+const { Model, DataTypes } = require('sequelize')
+
+class tbl_chats extends Model{
+  static init(sequelize){
+      super.init({
         id_chat: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false,
-          },
-          title: {
-            type: DataTypes.STRING,
-            allowNull: true,
-          },
-          created_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
-          },
-          updated_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
-          }
-    })
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          allowNull: false,
+        },
+        title: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+      }, {sequelize})
+  }
 }
+
+module.exports = tbl_chats

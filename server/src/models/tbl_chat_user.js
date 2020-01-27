@@ -1,5 +1,8 @@
-module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('tbl_chat_user', {
+const { Model, DataTypes } = require('sequelize')
+
+class tbl_chat_user extends Model{
+  static init(sequelize){
+      super.init({
         fk_id_user: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -18,13 +21,8 @@ module.exports = (sequelize, DataTypes) => {
                 key: 'id_chat',
             },
         },
-        created_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-        updated_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        }
-    })
+      }, {sequelize})
+  }
 }
+
+module.exports = tbl_chat_user
