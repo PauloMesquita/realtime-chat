@@ -9,22 +9,22 @@ module.exports = (sequelize, DataTypes) => {
         username: {
             type: DataTypes.STRING,
             allowNull: false,
-          },
-          email: {
+        },
+        email: {
             type: DataTypes.STRING,
             allowNull: false,
-          },
-          password: {
+        },
+        password: {
             type: DataTypes.STRING,
             allowNull: false,
-          },
-          created_at: {
+        },
+        created_at: {
             type: DataTypes.DATE,
             allowNull: false,
-          },
-          updated_at: {
+        },
+        updated_at: {
             type: DataTypes.DATE,
             allowNull: false,
-          }
+        }
     })
 }

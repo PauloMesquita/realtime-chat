@@ -1,6 +1,7 @@
 const routes = require('express').Router()
 const path = require('path')
+const UserController = require('./controllers/UserController')
 
-routes.get('*', (res, req) => {
-    res.sendFile(path.join(__dirname+''))
-})
+routes.post('/registerUser', UserController.registerUser)
+
+module.exports = routes
