@@ -10,12 +10,14 @@ module.exports = {
           allowNull: false,
         },
         username: {
-          type: Sequelize.STRING,
+          type: Sequelize.STRING(50),
           allowNull: false,
+          unique: true,
         },
         email: {
-          type: Sequelize.STRING,
+          type: Sequelize.STRING(100),
           allowNull: false,
+          unique: true,
         },
         password: {
           type: Sequelize.STRING,
@@ -33,6 +35,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInerface.dropTable('tbl_users')
+    return queryInterface.dropTable('tbl_users')
   }
 };

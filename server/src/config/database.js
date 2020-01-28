@@ -1,9 +1,15 @@
+require('dotenv').config({
+    path: process.env.NODE_ENV == 'test' ? '.env.test' : '.env'
+})
+
+
 module.exports = {
-    dialect: 'mysql',
-    host: '191.252.192.173',
-    username: 'usuarioteste',
-    password: 'zilmarzin',
-    database: 'test',
+    dialect: process.env.DB_DIALECT || "mysql",
+    host: process.env.DB_HOST,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    storage: './__tests__/database.sqlite',
     define: {
         timestamps: true,
         underscored: true,
