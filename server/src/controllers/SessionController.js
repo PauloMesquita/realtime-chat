@@ -1,4 +1,5 @@
 const tbl_users = require('../models/tbl_users')
+const getCatch = require('../utils/getCatch')
 
 module.exports = {
     loginUser: async(req, res) => {

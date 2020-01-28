@@ -4,7 +4,7 @@ class tbl_messages extends Model{
   static init(sequelize){
     super.init({
       id_message: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
