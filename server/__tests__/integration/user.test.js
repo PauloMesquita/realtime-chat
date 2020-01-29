@@ -1,6 +1,7 @@
 const request = require('supertest')
 const app = require('../../src/app')
 const truncate = require('../utils/truncate')
+const factory = require('../factories')
 
 describe("CRUD User", () => {
     beforeEach(async () => {
@@ -62,15 +63,10 @@ describe("CRUD User", () => {
 
     //### LIST USERS ###
     it("should list users registered in the db", async() => {
-        const user1 = await request(app).post('/registerUser').send({
-            username: 'Paulo',
-            email: 'paulo@mesquita.dev',
-            password: '123123'
-        })
-        const user2 = await request(app).post('/registerUser').send({
-            username: 'Paulo V',
-            email: 'paulo@mesquita.devs',
-            password: '123123'
+        await factory.create('tbl_users')
+        await factory.create('tbl_users', {
+            username: "Paulo V",
+            email: "paulo@mesquita.devs"
         })
 
         const list = await request(app).get('/listUsers')
@@ -81,21 +77,17 @@ describe("CRUD User", () => {
         delete list.body[1].updatedAt
 
         expect(list.body).toStrictEqual([{
-            username: 'Paulo', email: 'paulo@mesquita.dev', password: '123123', id_user: user1.body.id_user
+            username: 'Paulo', email: 'paulo@mesquita.dev', password: '123123', id_user: 1
         },{
-            username: 'Paulo V', email: 'paulo@mesquita.devs', password: '123123', id_user: user2.body.id_user
+            username: 'Paulo V', email: 'paulo@mesquita.devs', password: '123123', id_user: 2
         }])
     })
 
     //### GET USER ###
     it("should get user registered in db", async() => {
-        const userRegistered = await request(app).post('/registerUser').send({
-            username: 'Paulo',
-            email: 'paulo@mesquita.dev',
-            password: '123123'
-        })
+        const userRegistered = await factory.create('tbl_users')
 
-        const user = await request(app).get(`/getUser/${userRegistered.body.id_user}`)
+        const user = await request(app).get(`/getUser/1`)
 
         delete user.body.createdAt
         delete user.body.updatedAt
@@ -106,20 +98,15 @@ describe("CRUD User", () => {
     })
 
     it("should report error not found with that id", async() => {
-
-        const user = await request(app).get(`/getUser/9999`)
+        const user = await request(app).get(`/getUser/1`)
 
         expect(user.body).toBe(null)
     })
 
     //### DELETE USER ###
     it("should not be in db after deleted", async() => {
-        const userRegistered = await request(app).post('/registerUser').send({
-            username: 'Paulo',
-            email: 'paulo@mesquita.dev',
-            password: '123123'
-        })
+        const userRegistered = await factory.create('tbl_users')
 
-        
+        await request(app).post('/deleteUser')
     })
 })

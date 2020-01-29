@@ -1,5 +1,4 @@
 const routes = require('express').Router()
-const path = require('path')
 const UserController = require('./controllers/UserController')
 const ChatController = require('./controllers/ChatController')
 const SessionController = require('./controllers/SessionController')

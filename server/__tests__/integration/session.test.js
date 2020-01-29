@@ -9,7 +9,9 @@ describe("Authentication", () => {
     })
 
     it("should return 1 if data is correct", async () => {
-        const user = await factory.create('tbl_users')
+        await factory.create('tbl_users')
+
+        const users = await request(app).get('/listUsers')
 
         const response = await request(app).post('/loginUser').send({
             email: "paulo@mesquita.dev",
@@ -20,7 +22,7 @@ describe("Authentication", () => {
     })
 
     it("should return 0 if data is incorrect", async () => {
-        const user = await factory.create('tbl_users')
+        await factory.create('tbl_users')
 
         const response = await request(app).post('/loginUser').send({
             email: "paulo@mesquita.dev",
