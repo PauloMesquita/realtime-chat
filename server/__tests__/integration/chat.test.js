@@ -9,14 +9,12 @@ describe('Chat function', () =>{
     })
 
     it('should create a chat',async () =>{
-        const chat = api.registerChat('conversa')
+        const chat = await api.registerChat('conversa')
         expect(chat.body.title).toBe('conversa')
     })
 
     it('should list chats', async() =>{
-        const expectedList = await request(app).post('/registerChat').send({
-            title: 'conversa'
-        })
+        const expectedList = await api.registerChat('conversa')
         delete expectedList.body.createdAt
         delete expectedList.body.updatedAt
 
@@ -29,16 +27,9 @@ describe('Chat function', () =>{
 
     it('should insert users and list the inserted users', async () =>{
 
-        const chat = await request(app).post('/registerChat').send({
-            title: 'conversa'
-        })
+        const chat = await api.registerChat('conversa')
 
-        const insert = await request(app).post('/insertUsers').send({
-            'id_users': [1,2],
-            'id_chat': chat.body.id_chat
-        })
-
-        console.log(insert.body)
+        const insert = await api.insertUsers([1,2], chat.body.id_chat)
 
     })
 

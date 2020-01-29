@@ -4,8 +4,8 @@ const getCatch = require('../utils/getCatch')
 
 module.exports = {
     sendMenssage: async(req, res) => {
-        const {content} = req.body
-        const message = await tbl_messages.create({content})
+        const {content, fk_id_user, fk_id_chat} = req.body
+        const message = await tbl_messages.create({content, fk_id_chat, fk_id_user})
         .catch(err => getCatch(err))
         return res.json(message)
     },
@@ -22,7 +22,7 @@ module.exports = {
     },
     deleteMessage: async(req, res) => {
         const id_message = req.params.id
-        const response = awai tbl_messages.destroy(where{id_message})
+        const response = await tbl_messages.destroy({where:{id_message}})
             .catch(err => getCatch(err))
         return res.json(response)
     },

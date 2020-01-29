@@ -14,7 +14,7 @@ describe("Authentication", () => {
 
     it("should return 0 if data is incorrect", async () => {
         await apiCalls.registerUser('Paulo', 'paulo@mesquita.dev', '123123')
-        const response = await apiCalls.loginUser('paulo@mesquita.dev', '123123')
+        const response = await apiCalls.loginUser('paulo@mesquita.dev', '123456')
         expect(response.text).toBe("0")
     })
 })
