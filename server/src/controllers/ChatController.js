@@ -41,6 +41,22 @@ module.exports = {
         return res.json(users)
     },
     deleteChat: async(req, res) => {
-        
+        const id = req.params.id
+        const response = await tbl_chats.destroy({where:{id_chat : id}})
+        .catch(err => getCatch(err))
+        return res.json(response)
     },
+    deleteChatUsers: async(req, res) => {
+        const {id_users, id_chat} = req.body
+        const response = {}
+        response.remove = []
+        for (id_user in id_users) {
+            response.remove[id_user] = await tbl_chat_user.destroy({where:{
+                fk_id_user : id_users[id_user],
+                fk_id_chat : id_chat
+            }})
+            .catch(err => getCatch(err))
+        }
+        return res.json(response.remove)
+    }
 }

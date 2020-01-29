@@ -13,6 +13,6 @@ const tbl_chat_user = require('../../src/models/tbl_chat_user')
 
 module.exports = () => {
     return Promise.all(models.map(model => {
-        return model.destroy({truncate: {cascade:true}, restartIdentity: true, force: true})
+        return model.destroy({truncate: {cascade:true}, restartIdentity: true})
     }))
 }

@@ -1,6 +1,4 @@
-const factory = require('../factories')
-const request = require('supertest')
-const app = require('../../src/app')
+const apiCalls = require('../utils/apiCalls')
 const truncate = require('../utils/truncate')
 
 describe("Authentication", () => {
@@ -9,26 +7,14 @@ describe("Authentication", () => {
     })
 
     it("should return 1 if data is correct", async () => {
-        await factory.create('tbl_users')
-
-        const users = await request(app).get('/listUsers')
-
-        const response = await request(app).post('/loginUser').send({
-            email: "paulo@mesquita.dev",
-            password: "123123"
-        })
-
+        await apiCalls.registerUser('Paulo', 'paulo@mesquita.dev', '123123')
+        const response = await apiCalls.loginUser('paulo@mesquita.dev', '123123')
         expect(response.text).toBe("1")
     })
 
     it("should return 0 if data is incorrect", async () => {
-        await factory.create('tbl_users')
-
-        const response = await request(app).post('/loginUser').send({
-            email: "paulo@mesquita.dev",
-            password: "123456"
-        })
-
+        await apiCalls.registerUser('Paulo', 'paulo@mesquita.dev', '123123')
+        const response = await apiCalls.loginUser('paulo@mesquita.dev', '123123')
         expect(response.text).toBe("0")
     })
 })
