@@ -47,6 +47,11 @@ module.exports = {
     //Message Controller
     sendMenssage: async(content, fk_id_user, fk_id_chat) => {
         return await request(app).post('/sendMenssage').send({content, fk_id_chat, fk_id_user}).then(response => response).catch(err => err)
-    }
+    },
+    getMessages: async(id) => {
+        return await request(app).get(`/getMessages/${id}`).then(response => response)
+            .then(response => response)
+            .catch(err => err)
+    },
 
 }

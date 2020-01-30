@@ -14,4 +14,8 @@ describe("CRUD Message", () => {
         expect(message.body.content).toBe("Mensagem teste 1")
     })
 
+    it("should get messages from a chat", async () => {
+        
+    })
+
 })

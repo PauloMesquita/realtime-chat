@@ -28,9 +28,10 @@ describe('Chat function', () =>{
     it('should insert users and list the inserted users', async () =>{
 
         const chat = await api.registerChat('conversa')
+        const user = await api.registerUser('Paulo', 'paulo@mesquita.dev', '123123')
 
-        const insert = await api.insertUsers([1,2], chat.body.id_chat)
-
+        const insert = await api.insertUsers([user.body.user_id], chat.body.id_chat)
+        console.log(insert)
     })
 
 })
