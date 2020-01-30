@@ -5,8 +5,6 @@ require('dotenv').config({
 const express = require('express')
 const path = require('path')
 
-require('./database')
-
 function AppController(){
 
     this.middlewares = () => {

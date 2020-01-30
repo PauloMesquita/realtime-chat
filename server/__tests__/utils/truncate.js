@@ -1,11 +1,7 @@
-const models = []
-models.push(require('../../src/models/tbl_chat_user'))
-models.push(require('../../src/models/tbl_messages'))
-models.push(require('../../src/models/tbl_users'))
-models.push(require('../../src/models/tbl_chats'))
+const {sequelize}  = require('../../src/models')
 
 module.exports = () => {
-    return Promise.all(models.map(model => {
-        return model.destroy({truncate: {cascade:true}, restartIdentity: true})
+    return Promise.all(Object.keys(sequelize.models).map(key => {
+        return sequelize.models[key].destroy({truncate: {cascade:true}, restartIdentity: true})
     }))
 }

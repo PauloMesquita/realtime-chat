@@ -20,7 +20,7 @@ routes.get('/listChats', ChatController.listChats)
 routes.get('/listChatUsers/:id', ChatController.listChatUsers)
 routes.post('/insertUsers', ChatController.insertUsers)
 routes.delete('/deleteChat/:id', ChatController.deleteChat)
-routes.delete('deleteChatUsers', ChatController.deleteChatUsers)
+routes.delete('/deleteChatUsers', ChatController.deleteChatUsers)
 
 //MessageController routes
 routes.post('/sendMenssage', MessageController.sendMenssage)

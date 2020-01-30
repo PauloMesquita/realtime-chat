@@ -1,28 +1,27 @@
-const { Model, DataTypes } = require('sequelize')
-
-class tbl_chat_user extends Model{
-  static init(sequelize){
-      super.init({
-        fk_id_user: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            allowNull: false,
-            references: {
-              model: 'tbl_users',
-              key: 'id_user',
-            },
+module.exports = (sequelize, DataTypes) => {
+  const tbl_chat_user = sequelize.define('tbl_chat_user', {
+    fk_id_user: {
+      type: DataTypes.STRING(3),
+      primaryKey: true,
+      allowNull: false,
+      onDelete: 'cascade',
+      references: {
+        model: 'tbl_users',
+        key: 'id_user',
+      },
+      field: 'fk_id_user',
+    },
+    fk_id_chat: {
+        type: DataTypes.STRING(4),
+        primaryKey: true,
+        allowNull: false,
+        onDelete: 'cascade',
+        references: {
+            model: 'tbl_chats',
+            key: 'id_chat',
         },
-        fk_id_chat: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            allowNull: false,
-            references: {
-                model: 'tbl_chats',
-                key: 'id_chat',
-            },
-        },
-      }, {sequelize})
-  }
+        field: 'fk_id_chat'
+    },
+  })
+  return tbl_chat_user
 }
-
-module.exports = tbl_chat_user

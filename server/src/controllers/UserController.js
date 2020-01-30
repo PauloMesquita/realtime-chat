@@ -1,10 +1,12 @@
-const tbl_users = require('../models/tbl_users')
+const { tbl_users } = require('../models')
 const getCatch = require('../utils/getCatch')
+const generateRandomID = require('../utils/generateRandomID')
 
 module.exports = {
     registerUser: async(req, res) => {
         const { username, email, password } = req.body
-        const user = await tbl_users.create({ username, email, password }).catch(err => getCatch(err))
+        const id_user = await generateRandomID(tbl_users)
+        const user = await tbl_users.create({id_user, username, email, password }).catch(err => getCatch(err))
         return res.json(user)
     },
     listUsers: async(req, res) => {
