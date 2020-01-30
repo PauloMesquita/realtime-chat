@@ -1,12 +1,14 @@
 const { tbl_users } = require('../models')
 const getCatch = require('../utils/getCatch')
 const generateRandomID = require('../utils/generateRandomID')
+const generateDiscriminator = require('../utils/generateDiscriminator')
 
 module.exports = {
     registerUser: async(req, res) => {
         const { username, email, password } = req.body
         const id_user = await generateRandomID(tbl_users)
-        const user = await tbl_users.create({id_user, username, email, password }).catch(err => getCatch(err))
+        const person_number = await generateDiscriminator(username)
+        const user = await tbl_users.create({id_user, username, email, password, person_number }).catch(err => getCatch(err))
         return res.json(user)
     },
     listUsers: async(req, res) => {

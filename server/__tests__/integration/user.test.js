@@ -23,11 +23,6 @@ describe("CRUD User", () => {
         expect(user2.body).toBe("email must be unique")
     })
 
-    it("should report username already exists", async () => {
-        await apiCalls.registerUser('Paulo', 'paulo@mesquita.dev', '123123')
-        const user = await apiCalls.registerUser('Paulo', 'paulo@mesquita.devs', '123123')
-        expect(user.body).toBe("username must be unique")
-    })
 
     //### LIST USERS ###
     it("should list users registered in the db", async() => {
@@ -48,7 +43,7 @@ describe("CRUD User", () => {
         delete user.body.createdAt
         delete user.body.updatedAt
         expect(user.body).toStrictEqual({
-            username: 'Paulo', email: 'paulo@mesquita.dev', password: '123123', id_user: userRegistered.body.id_user
+            username: 'Paulo', email: 'paulo@mesquita.dev', password: '123123', id_user: userRegistered.body.id_user, person_number: userRegistered.body.person_number
         })
     })
 

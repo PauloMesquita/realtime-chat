@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
     id_chat: {
       type: DataTypes.STRING(4),
       primaryKey: true,
-      autoIncrement: true,
       allowNull: false,
       field: 'id_chat'
     },

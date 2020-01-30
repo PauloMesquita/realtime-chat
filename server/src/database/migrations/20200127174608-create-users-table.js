@@ -9,10 +9,14 @@ module.exports = {
           allowNull: false,
           field: 'id_user',
         },
+        person_number:{
+          type: Sequelize.STRING(4),
+          allowNull: false,
+          field: 'person_number'
+        },
         username: {
           type: Sequelize.STRING(50),
           allowNull: false,
-          unique: true,
           field: 'username'
         },
         email: {
